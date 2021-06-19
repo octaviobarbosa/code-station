@@ -1,11 +1,14 @@
-import { Button } from "@chakra-ui/react";
+import React from "react";
+
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./styles/theme";
+import Routes from "./routes";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Code/Station</h1>
-      <Button>Teste</Button>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Routes />
+    </ChakraProvider>
   );
 };
 
