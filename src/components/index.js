@@ -1,3 +1,4 @@
 import ButtonColorMode from "./ButtonColorMode";
+import CodeButton from "./CodeButton";
 
-export { ButtonColorMode };
+export { ButtonColorMode, CodeButton };

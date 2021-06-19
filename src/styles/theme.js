@@ -3,14 +3,12 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   colors: {
     transparent: "transparent",
-    black: "#000",
-    white: "#fff",
-    gray: {
-      50: "#f7fafc",
-      // ...
-      900: "#171923",
-    },
-    // ...
+    primary: { 50: "#229187", 100: "#2EC4B6", 150: "#39F7E4" },
+    secondary: { 50: "#000", 100: "#011627", 150: "#023259" },
+    black: { 50: "#000", 100: "#011627", 150: "#023259" },
+    white: { 50: "#DEE5DA", 100: "#F2FFFE", 200: "#FCFFFF" },
+    red: { 50: "#FF4057", 100: "#E71D36", 200: "#B5172A" },
+    orange: { 50: "#CC7F16", 100: "#FF9F1C", 200: "#FFC61C" },
   },
   fonts: {
     body: "system-ui, sans-serif",
