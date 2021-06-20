@@ -31,7 +31,7 @@ const Routes = () => (
     <Switch>
       <Route
         exact
-        path="/"
+        path="/login"
         render={(props) => (
           <Layout>
             <Login />
