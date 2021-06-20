@@ -52,6 +52,7 @@ const Routes = () => (
       />
 
       <Route
+        exact
         path="/create-user"
         render={(props) => (
           <Layout>
@@ -61,6 +62,7 @@ const Routes = () => (
       />
 
       <Route
+        exact
         path="/forgot-password"
         render={(props) => (
           <Layout>
@@ -70,7 +72,8 @@ const Routes = () => (
       />
 
       <Route
-        path="/doctor-detail"
+        exact
+        path="/doctor-detail/:id"
         render={(props) => (
           <Layout>
             <DoctorDetail />
@@ -79,6 +82,7 @@ const Routes = () => (
       />
 
       <PrivateRoute
+        exact
         path="/doctor-profile"
         title="Doctor Profile"
         component={DoctorProfile}

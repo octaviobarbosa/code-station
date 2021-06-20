@@ -1,8 +1,12 @@
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Center,
   Flex,
+  Grid,
+  GridItem,
+  IconButton,
   Input,
   InputGroup,
   InputRightElement,
@@ -75,11 +79,25 @@ const Login = () => {
         p="20px"
         m="0 auto"
       >
-        <Center>
-          <Text fontSize="24px" mb="15px" color="text.100">
-            Login
-          </Text>
-        </Center>
+        <Grid templateColumns="repeat(3, 1fr)">
+          <GridItem colSpan={1}>
+            <IconButton
+              variant="ghost"
+              icon={
+                <ArrowBackIcon
+                  boxSize={6}
+                  onClick={() => history.push("/home")}
+                />
+              }
+            />
+          </GridItem>
+
+          <GridItem colSpan={2}>
+            <Text fontSize="24px" mb="15px" color="text.100">
+              Login
+            </Text>
+          </GridItem>
+        </Grid>
 
         <InputGroup size="md" mb="15px">
           <Input

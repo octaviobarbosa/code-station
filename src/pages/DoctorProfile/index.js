@@ -31,12 +31,12 @@ const CreateUser = () => {
   const [doctor, setDoctor] = useState({});
 
   const getDoctor = useCallback(async () => {
+    setDoctor({ user_id: user.id });
+
     const responseApi = await api.get(`/doctors/${user.id}`);
 
     if (responseApi.status === 200) {
       setDoctor(responseApi.data);
-    } else {
-      setDoctor({ user_id: user.id });
     }
   }, [user.id]);
 
@@ -127,8 +127,8 @@ const CreateUser = () => {
           <Stack mb="15px">
             <Avatar
               size="2xl"
-              name="Segun Adebayo"
-              src="https://bit.ly/sage-adebayo"
+              name={user.name}
+              // src="https://bit.ly/sage-adebayo"
             />
           </Stack>
           <Text fontSize="24px" mb="15px" color="text.100">
