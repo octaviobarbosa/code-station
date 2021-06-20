@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CodeButton } from "../../components";
+import useApp from "../../hooks/useApp";
 import useNotification from "../../hooks/useNotification";
 import api from "../../services/api";
 
@@ -25,6 +26,8 @@ const Login = () => {
 
   const toast = useNotification();
   const history = useHistory();
+
+  const appData = useApp();
 
   const handleLogin = async () => {
     try {
@@ -53,6 +56,8 @@ const Login = () => {
 
       if (responseApi.status === 200) {
         toast.success("Login Success");
+        appData.setAppData(responseApi.data);
+
         history.push("/doctor-profile");
       }
     } catch (error) {

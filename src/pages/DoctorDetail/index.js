@@ -121,7 +121,7 @@ const CreateUser = () => {
           </Box>
         </Grid>
 
-        {/* <Center>
+        <Center>
           <Stack mb="15px">
             <Avatar
               size="2xl"
@@ -129,7 +129,7 @@ const CreateUser = () => {
               src="https://bit.ly/sage-adebayo"
             />
           </Stack>
-        </Center> */}
+        </Center>
 
         <InputGroup size="md" mb="15px">
           <Input
