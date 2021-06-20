@@ -7,13 +7,12 @@ import {
   IconButton,
   Input,
   InputGroup,
-  Select,
   Stack,
   Text,
   Textarea,
 } from "@chakra-ui/react";
 import React, { useState, useEffect, useCallback } from "react";
-import { CodeButton } from "../../components";
+import { CategorySelect, CodeButton } from "../../components";
 import useNotification from "../../hooks/useNotification";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
@@ -194,20 +193,12 @@ const CreateUser = () => {
         </InputGroup>
 
         <InputGroup size="md" mb="15px">
-          <Select
-            placeholder="category"
-            size="md"
-            color="text.100"
+          <CategorySelect
             onChange={(e) => {
               setDoctor({ ...doctor, category_id: e.target.value });
             }}
             value={doctor.category_id}
-          >
-            <option value={"56d9d998-efe0-4351-a337-8f5c9efefe5e"}>
-              Cardioligista
-            </option>
-            <option value={"2"}>dois</option>
-          </Select>
+          />
         </InputGroup>
 
         <Flex justifyContent="flex-end">

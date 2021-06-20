@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { CodeButton } from "../../components";
-import useNotification from "../../hooks/useNotification";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
@@ -20,7 +19,6 @@ const DoctorDetail = (props) => {
 
   const [doctor, setDoctor] = useState({});
 
-  const toast = useNotification();
   const history = useHistory();
 
   const getDoctor = useCallback(async () => {
@@ -73,6 +71,8 @@ const DoctorDetail = (props) => {
             {doctor?.user?.name}
           </Text>
         </Center>
+
+        <CodeButton>Mensagem Whatsapp</CodeButton>
       </Box>
     </Center>
   );

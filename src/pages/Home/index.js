@@ -1,6 +1,7 @@
 import { Avatar, Box, Center, Flex, Grid, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 
 import useApp from "../../hooks/useApp";
 import useNotification from "../../hooks/useNotification";
@@ -12,6 +13,7 @@ const Home = () => {
 
   const appData = useApp();
   const toast = useNotification();
+  const history = useHistory();
 
   const { user } = appData.getAppData();
 
@@ -49,6 +51,8 @@ const Home = () => {
                 size="sm"
                 name={user.name}
                 // src="https://bit.ly/sage-adebayo"
+                cursor="pointer"
+                onClick={() => history.push(`/doctor-profile`)}
               />
             </Stack>
           </Flex>
