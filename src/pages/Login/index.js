@@ -8,23 +8,55 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CodeButton } from "../../components";
 import useNotification from "../../hooks/useNotification";
+import api from "../../services/api";
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
+  const [login, setLogin] = useState({
+    email: null,
+    password: null,
+  });
+
   const toast = useNotification();
   const history = useHistory();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     try {
-      toast.success("Success!", "Login");
+      if (!login.email) {
+        toast.warning("Email is required", "Oops..");
+        return;
+      }
+
+      if (!login.password) {
+        toast.warning("Password is required", "Oops..");
+        return;
+      }
+
+      let status = 0;
+
+      const responseApi = await api.post("/sessions", login).catch((err) => {
+        if (err.response.status === 400) {
+          status = 400;
+          toast.warning(err.response.data.message, "Oops..");
+        }
+      });
+
+      if (!responseApi && status === 400) {
+        return;
+      }
+
+      if (responseApi.status === 200) {
+        toast.success("Login Success");
+        history.push("/doctor-profile");
+      }
     } catch (error) {
-      toast.error(`Oops... Error occurred..\n ${error}`);
+      toast.error(`${error}`, "Oops... Error occurred..");
     }
   };
 
@@ -45,7 +77,15 @@ const Login = () => {
         </Center>
 
         <InputGroup size="md" mb="15px">
-          <Input placeholder="email" size="md" mb="15px" color="text.100" />
+          <Input
+            placeholder="email"
+            size="md"
+            mb="15px"
+            color="text.100"
+            onChange={(e) => {
+              setLogin({ ...login, email: e.target.value });
+            }}
+          />
         </InputGroup>
         <InputGroup size="md" mb="15px">
           <Input
@@ -53,6 +93,9 @@ const Login = () => {
             type={show ? "text" : "password"}
             placeholder="Enter password"
             color="text.100"
+            onChange={(e) => {
+              setLogin({ ...login, password: e.target.value });
+            }}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
