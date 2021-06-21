@@ -11,7 +11,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { CategorySelect, CodeButton } from "../../components";
 import useNotification from "../../hooks/useNotification";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -21,13 +21,14 @@ import useApp from "../../hooks/useApp";
 import UfSelect from "../../components/UFSelect";
 
 const CreateUser = () => {
+  const [doctor, setDoctor] = useState({});
+
   const toast = useNotification();
   const history = useHistory();
   const appData = useApp();
+  const fileInput = useRef(null);
 
   const { user, token } = appData.getAppData();
-
-  const [doctor, setDoctor] = useState({});
 
   const getDoctor = useCallback(async () => {
     setDoctor({ user_id: user.id });
@@ -96,6 +97,27 @@ const CreateUser = () => {
     }
   };
 
+  const handleAvatar = async (e) => {
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+    const config = {
+      headers: {
+        authorization: `Bearer ${token}`,
+        "content-type": "multipart/form-data",
+      },
+    };
+
+    const responseApi = await api.patch("/users/avatar", formData, config);
+
+    if (responseApi.status === 204) {
+      toast.success("Avatar changed.", "Success");
+    } else {
+      toast.error("Something wrong is not right...", "Ops..");
+    }
+  };
+
   return (
     <Center height="100vh" width="100%">
       <Box
@@ -127,7 +149,17 @@ const CreateUser = () => {
             <Avatar
               size="2xl"
               name={user.name}
-              // src="https://bit.ly/sage-adebayo"
+              src={user.avatar}
+              cursor="pointer"
+              onClick={() => fileInput.current.click()}
+            />
+            <input
+              type="file"
+              name="avatar"
+              hidden
+              ref={fileInput}
+              onChange={handleAvatar}
+              accept=".jpg,.jpeg, .png"
             />
           </Stack>
           <Text fontSize="24px" mb="15px" color="text.100">

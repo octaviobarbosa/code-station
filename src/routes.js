@@ -33,6 +33,16 @@ const Routes = () => (
     <Switch>
       <Route
         exact
+        path="/"
+        render={(props) => (
+          <Layout>
+            <Home />
+          </Layout>
+        )}
+      />
+
+      <Route
+        exact
         path="/home"
         render={(props) => (
           <Layout>
